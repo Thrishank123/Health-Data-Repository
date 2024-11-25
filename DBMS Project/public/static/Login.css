@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f4f4f9;
+  }
+  
+  .container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 80vh; /* Adjust height as needed */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .illustration {
+    flex: 1; /* Equal width for both sections */
+    background-color: #eef3fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills the space without distortion */
+  }
+  
+  .login-form {
+    flex: 1; /* Equal width for both sections */
+    background-color: #4b77a8;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+  }
+  
+  .login-form h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+  }
+  
+  .login-form p {
+    margin: 0 0 20px;
+    font-size: 14px;
+  }
+  
+  .login-form a {
+    color: #a9d0f5;
+    text-decoration: none;
+  }
+  
+  .login-form a:hover {
+    text-decoration: underline;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #6794d6;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #547fc2;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .illustration,
+    .login-form {
+      height: auto;
+    }
+  }
+  
