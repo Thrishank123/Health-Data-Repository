@@ -30,7 +30,7 @@ app.post("/signup",async(req,res)=>{
   const data=req.body;
   if(data.role=="patient")
   {
-        const existingUser = await db.get("SELECT * FROM Patient WHERE username = ?", [data.username]);
+        const existingUser = await db.get("SELECT * FROM Patient WHERE Username = ?", [data.Username]);
        
         
         if (existingUser) {
@@ -40,7 +40,7 @@ app.post("/signup",async(req,res)=>{
             // Hash the password and insert the new user
             
             await db.run("INSERT INTO patient (Role,Username,Password,Gender,DateOfBirth,ContactNumber,Address,Email) VALUES (?, ?,?,?,?,?,?,?)", [data.role,data.username[0], data.password[0],data.gender,data.dob,data.contact[0],data.add,data.email[0]]);
-            res.render("Login.ejs"); // Redirect to login page or send success response
+            res.render("PatientDashboard.ejs"); // Redirect to login page or send success response
         }
   }
   else{
@@ -55,7 +55,7 @@ app.post("/signup",async(req,res)=>{
             
             await db.run("INSERT INTO Doctors (Username,Password,Specialization,ContactNumber,Email,Role) VALUES (?, ?,?,?,?,?)", [data.username[1], data.password[1],data.specs,data.contact[1],data.email[1],data.role]);
             res.render("Login.ejs"); // Redirect to login page or send success response
-  }
+  }}})
 
 // Route for Signup Page
 app.get('/signup', (req, res) => {
@@ -63,24 +63,22 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/dashboard', (req, res) => {
-  res.render('PatientDashboard');
-});
-
-app.get('/doctor', (req, res) => {
-  res.render('Doctor');
+  res.render('PatientDashboard.ejs');
 });
 
 // Start the server
 }})
 app.post("/login",async(req,res)=>{
-  const username=req.body("username");
-  const password=req.body("password");
+  const username=req.body.username;
+  const password=req.body.password;
   const row = await db.get("SELECT * FROM Patient WHERE username = ?", [username]);
   if(row)
   {
-    const isMatch = await bcrypt.compare(password, row.password);
-        if (isMatch) {
-            res.redirect("index.ejs"); 
+    console.log(row.Password)
+    console.log(password);
+    const isMatch = row.Password;
+        if (isMatch === password) {
+          res.render("PatientDashboard.ejs",{name:username}); 
         } else {
             res.send("Password not matched");
         }
@@ -90,6 +88,9 @@ app.post("/login",async(req,res)=>{
   }
   
 )
+app.post("/status",async(req,res)=>{
+  
+})
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
-});
+})
