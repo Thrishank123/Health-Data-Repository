@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/patient.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
+<body>
+  <header>
+    <div class="profile">
+      <img src="https://via.placeholder.com/40" alt="Profile">
+      <span>Hello Reallygreatsite</span>
+    </div>
+    <button class="logout">
+      <i class="fas fa-sign-out-alt"></i> Log out
+    </button>
+  </header>
+
+  <div class="content">
+    <!-- Status Section -->
+    <div class="dashboard-section">
+      <div class="status-card">
+        <h2>My Status</h2>
+        <div class="appointments">
+          <div>
+            <i class="fas fa-calendar-alt"></i> Appointments
+          </div>
+          <div class="count">4</div>
+        </div>
+        <div class="form-section">
+          <h3>Patient Health</h3>
+          <form>
+            <label for="health">How is the health?</label>
+            <select id="health" name="health">
+              <option value="good">Good</option>
+              <option value="moderate">Moderate</option>
+              <option value="poor">Poor</option>
+            </select>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Medication Section -->
+      <div class="medication-card">
+        <h2>Medication</h2>
+        <ul class="custom-icons">
+          <li><i class="fas fa-syringe"></i> Medicine 1</li>
+          <li><i class="fas fa-capsules"></i> Medicine 2</li>
+          <li><i class="fas fa-prescription-bottle-alt"></i> Medicine 3</li>
+          <li><i class="fas fa-vial"></i> Medicine 4</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Last 30 Days Data and Lab Reports Section -->
+    <div class="dashboard-section">
+      <div class="status-card" style="width: 48%;">
+        <h2>Last 30 Days Data</h2>
+        <canvas id="healthChart" width="300" height="150"></canvas>
+      </div>
+
+      <div class="lab-reports-card" style="width: 48%;">
+        <h2>Lab Reports</h2>
+        <table class="lab-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Report</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024-11-01</td>
+              <td>Blood Test</td>
+              <td>Normal</td>
+            </tr>
+            <tr>
+              <td>2024-11-08</td>
+              <td>X-Ray</td>
+              <td>Normal</td>
+            </tr>
+            <tr>
+              <td>2024-11-15</td>
+              <td>CT Scan</td>
+              <td>Under Review</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2024 Patient Dashboard - All Rights Reserved
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Chart.js implementation
+    const ctx = document.getElementById('healthChart').getContext('2d');
+    const healthChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Day 1', 'Day 5', 'Day 10', 'Day 15', 'Day 20', 'Day 25', 'Day 30'],
+        datasets: [{
+          label: 'Health Status',
+          data: [5, 4, 4.5, 4.2, 5, 4.8, 4.9],
+          backgroundColor: 'rgba(52, 120, 246, 0.8)',
+          borderColor: 'rgba(52, 120, 246, 1)',
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="profile">
+      <img src="https://via.placeholder.com/40" alt="Doctor Profile">
+      <span>Welcome, Dr. John Doe</span>
+    </div>
+    <button class="logout">
+      <i class="fas fa-sign-out-alt"></i> Log out
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Dashboard Section -->
+    <section>
+      <h1>Dashboard</h1>
+      <div class="dashboard-section">
+        <div class="card">
+          <h2>Today’s Appointments</h2>
+          <p>8 Appointments Scheduled</p>
+        </div>
+        <div class="card">
+          <h2>Follow-ups</h2>
+          <p>5 Patients Need Follow-up</p>
+        </div>
+        <div class="card">
+          <h2>Pending Lab Results</h2>
+          <p>3 Reports Pending</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section>
+      <h1>Profile</h1>
+      <form class="profile-form">
+        <label>Specialization:</label>
+        <input type="text" value="Cardiologist" />
+        <label>Contact Info:</label>
+        <input type="text" value="123-456-7890" />
+        <label>Availability:</label>
+        <input type="text" value="Mon-Fri, 9 AM - 5 PM" />
+        <button type="submit">Update Profile</button>
+      </form>
+    </section>
+
+    <!-- Manage Appointments Section -->
+    <section>
+      <h1>Manage Appointments</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jane Doe</td>
+            <td>2024-11-26</td>
+            <td>10:00 AM</td>
+            <td>Pending</td>
+            <td>
+              <button class="accept">Accept</button>
+              <button class="decline">Decline</button>
+            </td>
+          </tr>
+          <tr>
+            <td>John Smith</td>
+            <td>2024-11-26</td>
+            <td>11:00 AM</td>
+            <td>Accepted</td>
+            <td>
+              <button class="view">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Patient Management Section -->
+    <section>
+      <h1>Patient Management</h1>
+      <div class="patient-card">
+        <h2>John Doe</h2>
+        <p><strong>Medical History:</strong> Hypertension</p>
+        <p><strong>Current Medications:</strong> Amlodipine</p>
+        <p><strong>Lab Results:</strong> Normal</p>
+        <button class="view">View Full Record</button>
+      </div>
+    </section>
+
+    <!-- Treatment Plans Section -->
+    <section>
+      <h1>Treatment Plans</h1>
+      <form class="treatment-form">
+        <label>Patient Name:</label>
+        <input type="text" />
+        <label>Treatment Plan:</label>
+        <textarea rows="4"></textarea>
+        <button type="submit">Save Plan</button>
+      </form>
+    </section>
+
+    <!-- Prescribe Medication Section -->
+    <section>
+      <h1>Prescribe Medication</h1>
+      <form class="prescribe-form">
+        <label>Patient Name:</label>
+        <input type="text" />
+        <label>Medication:</label>
+        <input type="text" />
+        <label>Dosage:</label>
+        <input type="text" />
+        <button type="submit">Prescribe</button>
+      </form>
+    </section>
+
+    <!-- Lab Test Requests Section -->
+    <section>
+      <h1>Lab Test Requests</h1>
+      <form class="lab-request-form">
+        <label>Patient Name:</label>
+        <input type="text" />
+        <label>Test Type:</label>
+        <input type="text" />
+        <button type="submit">Request Test</button>
+      </form>
+    </section>
+
+    <!-- Analytics Dashboard -->
+    <section>
+      <h1>Analytics Dashboard</h1>
+      <canvas id="analyticsChart" width="400" height="200"></canvas>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2024 Doctor Dashboard - All Rights Reserved
+  </footer>
+
+  <!-- Chart.js for Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('analyticsChart').getContext('2d');
+    const analyticsChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Patient 1', 'Patient 2', 'Patient 3', 'Patient 4', 'Patient 5'],
+        datasets: [{
+          label: 'Recovery Time (Days)',
+          data: [30, 25, 20, 15, 10],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
