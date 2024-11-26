@@ -13,28 +13,28 @@
     </div>
     <div class="signup-form">
       <h2>Create Your Account</h2>
-      <form>
+      <form action="/signup" method="post">
         <div class="form-group">
           <label for="role">I am a:</label>
           <select id="role" name="role" onchange="toggleFields(this.value)">
-            <option value="patient">Patient</option>
-            <option value="doctor">Doctor</option>
+            <option value="patient" name="patient">Patient</option>
+            <option value="doctor" name="doctor">Doctor</option>
           </select>
         </div>
 
         <!-- Fields for Patient -->
         <div id="patient-fields">
           <div class="form-group">
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" placeholder="Enter your first name">
+            <label for="first-name">Username</label>
+            <input type="text" id="first-name" name="username" placeholder="Enter your first name">
           </div>
           <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" placeholder="Enter your last name">
+            <label for="last-name">Password</label>
+            <input type="password" id="last-name"  name="password" placeholder="Enter your last name">
           </div>
           <div class="form-group">
             <label for="gender">Gender</label>
-            <select id="gender">
+            <select id="gender" name="gender">
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -42,43 +42,47 @@
           </div>
           <div class="form-group">
             <label for="dob">Date of Birth</label>
-            <input type="date" id="dob">
+            <input type="date" name="dob" id="dob">
           </div>
           <div class="form-group">
             <label for="contact">Contact Number</label>
-            <input type="text" id="contact" placeholder="Enter your contact number">
+            <input type="text" id="contact" name="contact" placeholder="Enter your contact number">
           </div>
           <div class="form-group">
             <label for="address">Address</label>
-            <textarea id="address" placeholder="Enter your address"></textarea>
+            <textarea id="address" name="add" placeholder="Enter your address"></textarea>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email">
+            <input type="email" id="email" name="email" placeholder="Enter your email">
           </div>
         </div>
 
         <!-- Fields for Doctor -->
         <div id="doctor-fields" style="display: none;">
           <div class="form-group">
-            <label for="doctor-name">Name</label>
-            <input type="text" id="doctor-name" placeholder="Enter your name">
+            <label for="doctor-name">Username</label>
+            <input type="text" id="doctor-name" name="username" placeholder="Enter your name">
+          </div>
+          <div class="form-group">
+            <label for="doctor-pass">Password</label>
+            <input type="password" id="doctor-pass" name="password" placeholder="Enter your name">
           </div>
           <div class="form-group">
             <label for="specialization">Specialization</label>
-            <input type="text" id="specialization" placeholder="Enter your specialization">
+            <input type="text" id="specialization" name="specs"placeholder="Enter your specialization">
           </div>
           <div class="form-group">
             <label for="doctor-contact">Contact Number</label>
-            <input type="text" id="doctor-contact" placeholder="Enter your contact number">
+            <input type="text" id="doctor-contact" name="contact" placeholder="Enter your contact number">
           </div>
           <div class="form-group">
             <label for="doctor-email">Email</label>
-            <input type="email" id="doctor-email" placeholder="Enter your email">
+            <input type="email" id="doctor-email" name="email" placeholder="Enter your email">
           </div>
         </div>
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" >Sign Up</button>
       </form>
     </div>
   </div>
