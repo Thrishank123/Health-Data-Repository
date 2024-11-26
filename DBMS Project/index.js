@@ -61,36 +61,45 @@ app.post("/signup",async(req,res)=>{
 app.get('/signup', (req, res) => {
   res.render('Signup');
 });
-
+app.post("/logout",async(req,res)=>{
+  res.render("Login.ejs");
+}
+)
 app.get('/dashboard', (req, res) => {
   res.render('PatientDashboard.ejs');
 });
-
-// Start the server
-}})
 app.post("/login",async(req,res)=>{
   const username=req.body.username;
   const password=req.body.password;
-  const row = await db.get("SELECT * FROM Patient WHERE username = ?", [username]);
-  if(row)
+  const patient = await db.get("SELECT * FROM Patient WHERE Username = ?", [username]);
+  const doctor = await db.get("SELECT * FROM Doctors WHERE Username = ?", [username]);
+  if(patient)
   {
-    console.log(row.Password)
-    console.log(password);
-    const isMatch = row.Password;
+    const isMatch = patient.Password;
         if (isMatch === password) {
           res.render("PatientDashboard.ejs",{name:username}); 
         } else {
             res.send("Password not matched");
         }
-    } else {
-        res.send("User not found");
+    } 
+    else if(doctor)
+    {
+      const isMatch = doctor.Password;
+      console.log(doctor.Password);
+      console.log(password);
+        if (isMatch === password) {
+          res.render("Doctor.ejs",{name:username}); 
+        } else {
+            res.send("Password not matched");
+        }
     }
-  }
+    else{
+      res.send("user not found");
+    }
+    }
+  
   
 )
-app.post("/status",async(req,res)=>{
-  
-})
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
 })
