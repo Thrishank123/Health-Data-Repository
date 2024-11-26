@@ -4,14 +4,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
+    width: 100vw;
     background-color: #f4f4f9;
   }
   
   .container {
     display: flex;
     width: 100%;
-    height: 100vh; /* Adjust height as needed */
+    height: 100vh;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -19,7 +20,7 @@ body {
   }
   
   .illustration {
-    flex: 1; /* Equal width for both sections */
+    flex: 1;
     background-color: #eef3fd;
     display: flex;
     justify-content: center;
@@ -29,36 +30,22 @@ body {
   .illustration img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image fills the space without distortion */
+    object-fit: cover;
   }
   
-  .login-form {
-    flex: 1; /* Equal width for both sections */
+  .signup-form {
+    flex: 1;
     background-color: #4b77a8;
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 40px;
+    padding:0px 40px 0px 40px;
   }
   
-  .login-form h2 {
-    margin: 0 0 10px;
+  .signup-form h2 {
+    margin-bottom: 20px;
     font-size: 24px;
-  }
-  
-  .login-form p {
-    margin: 0 0 20px;
-    font-size: 14px;
-  }
-  
-  .login-form a {
-    color: #a9d0f5;
-    text-decoration: none;
-  }
-  
-  .login-form a:hover {
-    text-decoration: underline;
   }
   
   .form-group {
@@ -71,19 +58,15 @@ body {
     margin-bottom: 5px;
   }
   
-  .form-group input {
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
     width: 100%;
     padding: 10px;
     font-size: 14px;
     border: none;
     border-radius: 5px;
-  }
-  
-  .form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    margin-top: 5px;
   }
   
   button {
@@ -109,7 +92,7 @@ body {
     }
   
     .illustration,
-    .login-form {
+    .signup-form {
       height: auto;
     }
   }
