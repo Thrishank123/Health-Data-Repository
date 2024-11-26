@@ -61,8 +61,13 @@ app.post("/signup",async(req,res)=>{
 app.get('/signup', (req, res) => {
   res.render('Signup');
 });
+
 app.get('/dashboard', (req, res) => {
   res.render('PatientDashboard');
+});
+
+app.get('/doctor', (req, res) => {
+  res.render('Doctor');
 });
 
 // Start the server
