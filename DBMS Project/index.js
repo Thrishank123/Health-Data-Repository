@@ -14,6 +14,9 @@ app.get('/', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('Signup');
 });
+app.get('/dashboard', (req, res) => {
+  res.render('PatientDashboard');
+});
 
 // Start the server
 app.listen(3000, () => {
