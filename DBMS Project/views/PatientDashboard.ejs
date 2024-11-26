@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/patient.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
   <header>
     <div class="profile">
       <img src="https://via.placeholder.com/40" alt="Profile">
       <% if (locals.name) { %>
-        <span>Hello <%= name %></span>
+        <span><a href="/profile" id="Profile">Hello <%= name %></a></span>
       <% } %>
     </div>
-    <button class="logout" href="/logout">
+    <!-- Logout button as a link -->
+    <a href="/logout" class="logout">
       <i class="fas fa-sign-out-alt"></i> Log out
-    </button>
+    </a>
   </header>
+  
 
   <div class="content">
     <!-- Status Section -->
@@ -30,7 +36,9 @@
           <div>
             <i class="fas fa-calendar-alt"></i> Appointments
           </div>
-          <div class="count">4</div>
+          <div class="count">
+            <%= appointments %>
+          </div>
         </div>
         <div class="form-section">
           <h3>Patient Health</h3>
@@ -49,20 +57,47 @@
       <!-- Medication Section -->
       <div class="medication-card">
         <h2>Medication</h2>
-        <ul class="custom-icons">
-          <li><i class="fas fa-syringe"></i> Medicine 1</li>
-          <li><i class="fas fa-capsules"></i> Medicine 2</li>
-          <li><i class="fas fa-prescription-bottle-alt"></i> Medicine 3</li>
-          <li><i class="fas fa-vial"></i> Medicine 4</li>
-        </ul>
+        <table id="medicationTable">
+          <thead>
+            <tr>
+              <th id="medicationNameHeader">Medication Name</th>
+              <th id="dosageHeader">Dosage</th>
+              <th id="frequencyHeader">Frequency</th>
+              <th id="startDateHeader">Start Date</th>
+              <th id="endDateHeader">End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% medications.forEach(medication => { %>
+              <tr>
+                <td id="medicationName"><%= medication.medication_name %></td>
+                <td id="dosage"><%= medication.dosage %></td>
+                <td id="frequency"><%= medication.frequency %></td>
+                <td id="startDate"><%= medication.start_date %></td>
+                <td id="endDate"><%= medication.end_date ? medication.end_date : 'Ongoing' %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>        
       </div>
     </div>
 
-    <!-- Last 30 Days Data and Lab Reports Section -->
+    <!-- Health Status Pie Chart and Lab Reports Section -->
     <div class="dashboard-section">
       <div class="status-card" style="width: 48%;">
-        <h2>Last 30 Days Data</h2>
-        <canvas id="healthChart" width="300" height="150"></canvas>
+        <h2>Health Status Distribution</h2>
+        <ul>
+          <li id="goodData" hidden>
+            <%= chartData["Good"] %>
+          </li>
+          <li id="moderateData" hidden>
+            <%= chartData["Moderate"] %>
+          </li>
+          <li id="poorData" hidden>
+            <%= chartData["Poor"] %>
+          </li>
+        </ul>        
+        <canvas id="healthChart" width="300" height="300"></canvas>
       </div>
 
       <div class="lab-reports-card" style="width: 48%;">
@@ -76,21 +111,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2024-11-01</td>
-              <td>Blood Test</td>
-              <td>Normal</td>
-            </tr>
-            <tr>
-              <td>2024-11-08</td>
-              <td>X-Ray</td>
-              <td>Normal</td>
-            </tr>
-            <tr>
-              <td>2024-11-15</td>
-              <td>CT Scan</td>
-              <td>Under Review</td>
-            </tr>
+            <% labTests.forEach(function(test) { %>
+              <tr>
+                <td>
+                  <%= test.test_date %>
+                </td>
+                <td>
+                  <%= test.test_name %>
+                </td>
+                <td>
+                  <%= test.result %>
+                </td>
+              </tr>
+              <% }); %>
           </tbody>
         </table>
       </div>
@@ -103,26 +136,42 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Chart.js implementation
-    const ctx = document.getElementById('healthChart').getContext('2d');
+    // Chart.js Pie Chart implementation
+    const goodData = document.getElementById("goodData").textContent
+    const moderateData = document.getElementById("moderateData").textContent;
+    const poorData = document.getElementById("poorData").textContent
+    const ctx = document.getElementById('healthChart'
+
+    ).getContext('2d');
     const healthChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'pie',
       data: {
-        labels: ['Day 1', 'Day 5', 'Day 10', 'Day 15', 'Day 20', 'Day 25', 'Day 30'],
+        labels: ["Good", "Moderate", "Poor"],
         datasets: [{
-          label: 'Health Status',
-          data: [5, 4, 4.5, 4.2, 5, 4.8, 4.9],
-          backgroundColor: 'rgba(52, 120, 246, 0.8)',
-          borderColor: 'rgba(52, 120, 246, 1)',
-          borderWidth: 1,
+          data: [goodData, moderateData, poorData
+          ],
+          backgroundColor: ['#4CAF50', '#FFEB3B', '#F44336'],
+          borderColor: '#fff',
+          borderWidth: 1
         }]
       },
       options: {
-        scales: {
-          y: { beginAtZero: true }
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                return tooltipItem.label + ': ' + tooltipItem.raw;
+              }
+            }
+          }
         }
       }
     });
   </script>
 </body>
+
 </html>

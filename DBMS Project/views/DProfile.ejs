@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/profile.css">
+</head>
+<body>
+  <header>
+    <div class="profile">
+      <img src="https://via.placeholder.com/40" alt="Doctor Profile">
+      <span>Welcome, Dr. John Doe</span>
+    </div>
+    <!-- Link back to Dashboard -->
+    <a href="/dashboard" class="back-to-dashboard">Back to Dashboard</a>
+  </header>
+
+  <div class="content">
+    <h1>Your Profile</h1>
+    <form class="profile-form" action="/update-profile" method="POST">
+      <label>Specialization:</label>
+      <input type="text" name="specialization" value="Cardiologist" />
+      
+      <label>Contact Info:</label>
+      <input type="text" name="contact" value="123-456-7890" />
+      
+      <label>Availability:</label>
+      <input type="text" name="availability" value="Mon-Fri, 9 AM - 5 PM" />
+      
+      <button type="submit">Update Profile</button>
+    </form>
+  </div>
+
+  <footer>
+    © 2024 Doctor Dashboard - All Rights Reserved
+  </footer>
+</body>
+</html>

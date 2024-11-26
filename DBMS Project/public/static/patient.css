@@ -12,6 +12,7 @@ body {
     padding: 10px 20px;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
+    height: 3rem;
   }
   
   header .profile {
@@ -188,4 +189,84 @@ body {
     border-top: 1px solid #ddd;
     margin-top: 20px;
   }
+
+  /* Basic table styling */
+#medicationTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#medicationTable thead {
+  background-color: #28a745;
+  color: white;
+  text-align: left;
+}
+
+#medicationTable th, #medicationTable td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+#medicationTable th {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#medicationTable tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+#medicationTable tbody tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+#medicationTable tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Styling for specific columns with IDs */
+#medicationName {
+  color: #333;
+}
+
+#dosage {
+  color: #007bff; /* Blue for dosage */
+}
+
+#frequency {
+  color: #ffc107; /* Yellow for frequency */
+}
+
+#startDate {
+  color: #28a745; /* Green for start date */
+}
+
+#endDate {
+  color: #dc3545; /* Red for ongoing or end date */
+}
+
+/* Ongoing Medication Status */
+#endDate:empty {
+  color: #dc3545; /* Red color for ongoing status */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #medicationTable {
+    font-size: 14px;
+  }
   
+  #medicationTable th, #medicationTable td {
+    padding: 8px;
+  }
+}
+
+#Profile
+{
+  text-decoration: none;
+  color: black;
+}
